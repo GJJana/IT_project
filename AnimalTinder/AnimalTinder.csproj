@@ -498,6 +498,7 @@
     <Content Include="Views\Animals\Edit.cshtml" />
     <Content Include="Views\Animals\Index.cshtml" />
     <Content Include="Views\Animals\Carousel.cshtml" />
+    <Content Include="Views\Animals\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

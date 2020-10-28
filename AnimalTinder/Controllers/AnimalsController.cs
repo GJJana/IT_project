@@ -7,13 +7,29 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnimalTinder.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace AnimalTinder.Controllers
 {
     public class AnimalsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        [Authorize]
+        public ActionResult MyProfile()
+        {
+            var userId = this.User.Identity.GetUserId();
+            var user = this.Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(userId);
+            
+            Animal animal = db.Animals.Find(user.Id);
+            if (animal == null)
+            {
+                return HttpNotFound();
+            }
+            return View(animal);
+        }
 
+        //GET Carousel
         public ActionResult Carousel()
         {
             return View(db.Animals.ToList());
