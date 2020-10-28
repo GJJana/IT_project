@@ -14,6 +14,10 @@ namespace AnimalTinder.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult Carousel()
+        {
+            return View(db.Animals.ToList());
+        }
         // GET: Animals
         public ActionResult Index()
         {

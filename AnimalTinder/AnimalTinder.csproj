@@ -189,6 +189,10 @@
     <Compile Include="Migrations\202010241525504_first.Designer.cs">
       <DependentUpon>202010241525504_first.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010281823293_second.cs" />
+    <Compile Include="Migrations\202010281823293_second.Designer.cs">
+      <DependentUpon>202010281823293_second.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Animal.cs" />
@@ -493,6 +497,7 @@
     <Content Include="Views\Animals\Details.cshtml" />
     <Content Include="Views\Animals\Edit.cshtml" />
     <Content Include="Views\Animals\Index.cshtml" />
+    <Content Include="Views\Animals\Carousel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -513,6 +518,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202010241525504_first.resx">
       <DependentUpon>202010241525504_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010281823293_second.resx">
+      <DependentUpon>202010281823293_second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

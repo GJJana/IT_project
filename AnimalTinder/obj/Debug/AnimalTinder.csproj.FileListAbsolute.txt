@@ -111,3 +111,4 @@ C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\bin\System.Web.Http.WebHos
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\bin\System.Net.Http.Formatting.xml
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\bin\System.Web.Http.xml
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\bin\System.Web.Http.WebHost.xml
+C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.second.resources
