@@ -17,7 +17,6 @@
             background-color: black;
         }
 
-
         .vertical .carousel-inner {
             height: 80vh;
         }
@@ -57,34 +56,41 @@
             top: 100%;
         }
 
-        #btn-like{
+        #btn-like {
             z-index: 10;
+        }
+
+        .myButton {
+            position: absolute;
+            right: 50%;
+            top: 74vh;
         }
     </style>
 
 
 
     <div id="myCarousel" class="carousel slide vertical" data-ride="carousel" style="overflow: hidden">
-        
-        
+
+
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-           
+
             <div class="item active">
                 <img src=@Model.ToList().First().ImgURL alt="" style="width: 100%; height: 100%">
             </div>
-            
-            @for(int i=1; i<Model.ToList().Count;i++)
+
+            @for (int i = 1; i < Model.ToList().Count; i++)
             {
-              <div class="item">
-              <img src=@Model.ToArray()[i].ImgURL alt="" style="width: 100%;">
-              </div>
+                <div class="item">
+                    <button type="button" class="myButton" onclick="alert('slide1')">Like</button>
+                    <img src=@Model.ToArray()[i].ImgURL alt="" style="width: 100%;">
+                </div>
             }
-        
+
             <input id="btn-like" type="button" value="button" />
 
 
-            </div>
+        </div>
 
         <!-- Left and right controls -->
         <a class="left carousel-control" data-target="#myCarousel" data-slide="prev">

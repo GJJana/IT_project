@@ -20,6 +20,7 @@ namespace AnimalTinder.Controllers
         {
             var userId = this.User.Identity.GetUserId();
             var user = this.Request.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(userId);
+
             
             Animal animal = db.Animals.Find(user.Id);
             if (animal == null)
