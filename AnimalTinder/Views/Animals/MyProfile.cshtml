@@ -4,18 +4,34 @@
     ViewBag.Title = "MyProfile";
 }
 
-<h2>MyProfile</h2>
+<h2>My Profile</h2>
 <div>
     
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
-           
+
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Name)
+        </dd>
+
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sort)
         </dd>
 
         <dt>
@@ -40,6 +56,12 @@
 
         <dd>
             @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dd>
+            @Html.ActionLink("Liked Animals", "LikedAnimals", new { id = Model.ID })
+        </dd>
+        <dd>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
         </dd>
 
     </dl>

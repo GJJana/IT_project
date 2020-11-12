@@ -22,12 +22,13 @@ namespace AnimalTinder
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                        "~/Scripts/bootstrap.js",
                       "~/Scripts/bootbox.js",
+                      "~/Scripts/mdb.min.js",
                       "~/Scripts/DataTables/dataTables.bootstrap.js",
                       "~/Scripts/DataTables/jquery.dataTables.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css", "~/Content/DataTables/css/dataTables.bootstrap.css"));
+                      "~/Content/site.css", "~/Content/mdb.min.css", "~/Content/DataTables/css/dataTables.bootstrap.css"));
         }
     }
 }

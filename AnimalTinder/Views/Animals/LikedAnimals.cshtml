@@ -1,0 +1,43 @@
+﻿@model AnimalTinder.Models.Animal
+
+@{
+    ViewBag.Title = "LikedAnimals";
+}
+
+<h2>LikedAnimals fo @Model.Name</h2>
+@foreach (var item in Model.LikedAnimals)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            <img src="@item.ImgURL" style="max-width:100px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+            @Html.ActionLink("Back To Profile", "MyProfile")
+
+            @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
+            {
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <a class="btn-link delete-js" data-id="@item.ID">Delete</a>
+            }
+
+
+        </td>
+    </tr>
+}
+

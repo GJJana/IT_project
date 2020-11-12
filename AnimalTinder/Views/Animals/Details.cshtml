@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details about @Model.Name</h2>
 
 <div>
-    <h4>Animal</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,6 +16,20 @@
 
         <dd>
             @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sort)
         </dd>
 
         <dt>
@@ -31,7 +45,7 @@
         </dt>
 
         <dd>
-            <img src="@Model.ImgURL"style="max-width:100px" />
+            <img src="@Model.ImgURL" style="max-width:100px" />
         </dd>
 
         <dt>
@@ -45,6 +59,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
