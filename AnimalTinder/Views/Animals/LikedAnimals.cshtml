@@ -8,30 +8,43 @@
 <h3>@Model.LikedAnimals.Count</h3>
 @foreach (var item in Model.LikedAnimals.ToList())
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            <img src="@item.ImgURL" style="max-width:100px" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Type)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Breed)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Age)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Location)
+    </td>
 
-            @Html.ActionLink("Details", "Details", new { id = item.ID })
-            @Html.ActionLink("Back To Profile", "MyProfile")
-            @Html.ActionLink("Delete", "DeleteLiked", new { id = item.ID })
+    <td>
+        <img src="@item.ImgURL" style="max-width:100px" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
 
-            
+        @Html.ActionLink("Details", "Details", new { id = item.ID })
+        @Html.ActionLink("Back To Profile", "MyProfile")
+        @Html.ActionLink("Delete", "DeleteLiked", new { id = item.ID })
 
 
 
-        </td>
-    </tr>
+
+
+    </td>
+</tr>
 }
 

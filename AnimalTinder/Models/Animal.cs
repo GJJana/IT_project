@@ -12,24 +12,28 @@ namespace AnimalTinder.Models
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
+        
         public string Type { get; set; }
         public string Breed { get; set; }
-        public string ImgURL { get; set; }
-        
-        
-        public string Email { get; set; }
+        [Range(0,99)]
+        public int Age { get; set; }
         public string Gender { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+        [Display(Name="Image")]
+        public string ImgURL { get; set; }
+        public string Email { get; set; }
+   
 
         public string userID { get; set; }
-        public List<string> TypeAnimals { get; set; }
+        
         public List<Animal> LikedAnimals { get; set; }
 
         public Animal()
         {
             LikedAnimals = new List<Animal>();
-            TypeAnimals = new List<string>();
-            
+           
+
 
 
         }

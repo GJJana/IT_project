@@ -26,6 +26,9 @@
                         @Html.DisplayNameFor(model => model.Gender)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Location)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.ImgURL)
                     </th>
                     <th>
@@ -59,6 +62,10 @@
                             @Html.DisplayFor(modelItem => item.Gender)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+
+                        <td>
                             <img src="@item.ImgURL" style="max-width:100px" />
                         </td>
                         <td>
@@ -68,12 +75,7 @@
 
                             @Html.ActionLink("Details", "Details", new { id = item.ID })
                             <button> Report</button>
-                            @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-                            {
-
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-
-                            }
+                           
                             @if (User.IsInRole("Admin"))
                             {
                                 <button type="button" class="btn-link delete-js" data-id="@item.ID" data-toggle="modal" data-target="#basicExampleModal">Delete</button>

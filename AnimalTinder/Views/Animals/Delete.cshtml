@@ -20,14 +20,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Type)
         </dt>
 
@@ -42,13 +34,27 @@
         <dd>
             @Html.DisplayFor(model => model.Breed)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.ImgURL)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImgURL)
+            <img src="@Model.ImgURL" style="max-width:100px" />
         </dd>
 
         <dt>
