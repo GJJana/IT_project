@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<style>
+    .navbar a {
+        color: #fff;
+        border-color: #1d4e89;
+    }
+
+        .navbar a:hover {
+            color: #1d4e89;
+        }
+
+    .navbar-toggle .icon-bar {
+        background-color: #fff;
+    }
+
+    .navbar a.navbar-brand:hover {
+        color: #fff;
+    }
+</style>
+<body>
+    <div class="navbar navbar-fixed-top" style="background-color: #1d4e89; border-color: #1d4e89">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a href="" class="navbar-brand">Animal Tinder</a> 
+            </div>
+            <div class="navbar-collapse collapse">
+                
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        @RenderBody()
+        @*<hr />*@
+        <footer>
+            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

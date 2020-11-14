@@ -4,8 +4,9 @@
     ViewBag.Title = "LikedAnimals";
 }
 
-<h2>LikedAnimals fo @Model.Name</h2>
-@foreach (var item in Model.LikedAnimals)
+<h2>LikedAnimals of @Model.Name</h2>
+<h3>@Model.LikedAnimals.Count</h3>
+@foreach (var item in Model.LikedAnimals.ToList())
 {
     <tr>
         <td>
@@ -24,17 +25,10 @@
 
             @Html.ActionLink("Details", "Details", new { id = item.ID })
             @Html.ActionLink("Back To Profile", "MyProfile")
+            @Html.ActionLink("Delete", "DeleteLiked", new { id = item.ID })
 
-            @if (User.IsInRole("Admin") || User.IsInRole("Editor"))
-            {
+            
 
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID })
-
-            }
-            @if (User.IsInRole("Admin"))
-            {
-                <a class="btn-link delete-js" data-id="@item.ID">Delete</a>
-            }
 
 
         </td>

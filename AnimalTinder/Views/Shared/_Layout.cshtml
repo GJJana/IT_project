@@ -13,8 +13,23 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
+<style>
+    .navbar a{
+        color: #fff;
+        border-color: #1d4e89;
+    }
+    .navbar a:hover{
+        color: #1d4e89;
+    }
+    .navbar a.navbar-brand:hover {
+        color: #fff;
+    }
+    .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+</style>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top" style="background-color: #1d4e89; border-color: #1d4e89">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,23 +41,23 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Index", "Index", "Animals")</li>
-                    <li>@Html.ActionLink("Carousel", "Carousel", "Animals")</li>
+
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li>@Html.ActionLink("MyProfile", "MyProfile", "Animals")</li>}
-
-
+                        <li>@Html.ActionLink("Index", "Index", "Animals")</li>
+                        <li>@Html.ActionLink("Carousel", "Carousel", "Animals")</li>
+                        <li>@Html.ActionLink("MyProfile", "MyProfile", "Animals")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @RenderBody()
-        <hr />
+        @*<hr />*@
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
         </footer>
     </div>
 

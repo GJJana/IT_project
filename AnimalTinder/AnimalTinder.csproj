@@ -559,6 +559,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
@@ -700,6 +702,9 @@
     <Content Include="Views\Animals\MyProfile.cshtml" />
     <Content Include="Views\Animals\LikedAnimals.cshtml" />
     <Content Include="Views\Animals\Delete.cshtml" />
+    <Content Include="Views\Animals\DeleteLiked.cshtml" />
+    <Content Include="Views\Shared\_CreateLayout.cshtml" />
+    <Content Include="Views\Account\ConfirmationEmailSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

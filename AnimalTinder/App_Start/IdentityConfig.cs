@@ -45,11 +45,7 @@ namespace AnimalTinder
            //      ConfigurationManager.AppSettings["mailPassword"]
            //     );
             var response = await client.SendEmailAsync(myMessage);
-            if(client!=null)
-            {
-                await client.SendEmailAsync(myMessage);
-            }
-            else
+            if(client==null)
             {
                 Trace.TraceError("Failed to create Web transport.");
                 await Task.FromResult(0);

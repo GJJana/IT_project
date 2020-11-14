@@ -64,13 +64,40 @@ namespace AnimalTinder.Controllers
         //GET Carousel
         public ActionResult Carousel()
         {
+            ViewBag.Gender = "Non-Binery";
+            ViewBag.Type = "All";
+            
+
+            foreach (Animal a in db.Animals.ToList())
+            {
+                if (a.Email.Equals(User.Identity.GetUserName()))
+                {
+                    ViewBag.Gender = a.Gender;
+                    ViewBag.Type = a.Type;
+                    ViewBag.LikedAnimals = a.LikedAnimals;
+                }
+
+            }
+            
+
             return View(db.Animals.ToList());
         }
         // GET: Animals
         public ActionResult Index()
         {
-         
+            ViewBag.Gender = "Non-Binery";
+            ViewBag.Type = "All";
             
+            foreach(Animal a in db.Animals.ToList())
+            {
+                if (a.Email.Equals(User.Identity.GetUserName()))
+                {
+                    ViewBag.Gender = a.Gender;
+                    ViewBag.Type = a.Type;
+                    ViewBag.LikedAnimals = a.LikedAnimals;
+                }
+
+            }
             return View(db.Animals.ToList());
         }
 
@@ -93,11 +120,11 @@ namespace AnimalTinder.Controllers
         public ActionResult Create()
         {
             //if the user is already registered he can not create another animal
-            foreach (Animal a in db.Animals.ToList())
-            {
-               // if (User.Identity.GetUserId().Equals(a.userID))
-                    return RedirectToAction("MyProfile");
-            }
+           foreach (Animal a in db.Animals.ToList())
+           {
+              if (User.Identity.GetUserId().Equals(a.userID))
+                   return RedirectToAction("MyProfile");
+           }
             //types of animals list created
             Animal animal = new Animal();
             animal.TypeAnimals = new System.Collections.Generic.List<string> { "Dog", "Turtle", "Rabbit", "Parrot", "Cat", "Fish", "Mouse", "Hamster", "Cow", "Duck", "Shrimp", "Pig", "Goat", "Crab", "Deer", "Bee", "Sheep", "Turkey", "Dove", "Chicken", "Horse", "Bird", "Squirrel", "Ox", "Lion", "Panda", "Walrus", "Otter", "Kangaroo", "Monkey", "Koala", "Mole", "Elephant", "Leopard", "Hippopotamus", "Giraffe", "Fox", "Coyote", "Hedgehong", "Camel", "Starfish", "Alligator", "Owl", "Tiger", "Bear", "Whale", "Raccoon", "Crocodile", "Dolphin", "Snake", "Elk", "Bat", "Hare", "Toad", "Frog", "Rat", "Badger", "Lizard", "Reindeer", "Insect" };
@@ -109,7 +136,7 @@ namespace AnimalTinder.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name,Type,Sort,Age,ImgURL")] Animal animal, HttpPostedFileBase file)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Name,Type,Breed,Age,Gender,ImgURL")] Animal animal, HttpPostedFileBase file)
         {
 
             FileStream stream;
@@ -237,6 +264,39 @@ namespace AnimalTinder.Controllers
             db.Users.Remove(db.Users.Find(id));
             return RedirectToAction("Index");
         }
+
+        // GET: Animals/DeleteLiked/5
+        public ActionResult DeleteLiked(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Animal animal = db.Animals.Find(id);
+            if (animal == null)
+            {
+                return HttpNotFound();
+            }
+            return View(animal);
+        }
+
+        // POST: Animals/DeleteLiked/5
+        [HttpPost, ActionName("DeleteLiked")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmedLiked(int id)
+        {
+            Animal animal = db.Animals.Find(id);
+            string userId = User.Identity.GetUserId();
+            foreach(Animal a in db.Animals.ToList())
+            {
+                if (userId.Equals(a.userID))
+                    a.LikedAnimals.Remove(animal);
+            }
+            db.SaveChanges();
+           
+            return RedirectToAction("MyProfile");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

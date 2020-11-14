@@ -78,17 +78,17 @@ namespace AnimalTinder.Controllers
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user != null)
             {
+
+
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
                     ViewBag.errorMessage = "You must have a confirmed email to log on.";
                     return View("Error");
                 }
-                //if (Session[0].Equals("UserConfirmedEmail"))
-              //  {
-                //    RedirectToAction("Create", "Animals");
-               // }
-                
+              
+
+
             }
 
             // This doesn't count login failures towards account lockout
@@ -97,7 +97,8 @@ namespace AnimalTinder.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    UserManager.AddToRole(user.Id, "User");
+                    return RedirectToAction("Create", "Animals");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -160,6 +161,13 @@ namespace AnimalTinder.Controllers
         {
             return View();
         }
+        
+        [AllowAnonymous]
+        public ActionResult ConfirmationEmailSent()
+        {
+            return View();
+        }
+
 
         //
         // POST: /Account/Register
@@ -187,11 +195,11 @@ namespace AnimalTinder.Controllers
                     // Uncomment to debug locally 
                     // TempData["ViewBagLink"] = callbackUrl;
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                                    + "before you can log in.";
+                   
 
-                    UserManager.AddToRole(user.Id, "User");
-                    return RedirectToAction("Create", "Animals");
+
+                    return RedirectToAction("ConfirmationEmailSent");
+                    
                 }
                 AddErrors(result);
             }
@@ -213,9 +221,8 @@ namespace AnimalTinder.Controllers
 
             if(result.Succeeded)
             {
-                Session.Clear();
-                
-                Session["UserConfirmedEmail"] ="Yes";
+          
+              //  Session["FirstLogIn"] ="Yes";
                 return View("ConfirmEmail");
             }
             return View("Error");
