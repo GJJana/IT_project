@@ -88,8 +88,8 @@
     <Reference Include="React.Web.Mvc4, Version=5.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
       <HintPath>..\packages\React.Web.Mvc4.5.2.11\lib\net40\React.Web.Mvc4.dll</HintPath>
     </Reference>
-    <Reference Include="SendGrid, Version=9.21.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\SendGrid.9.21.0\lib\net452\SendGrid.dll</HintPath>
+    <Reference Include="SendGrid, Version=9.21.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.9.21.1\lib\net452\SendGrid.dll</HintPath>
     </Reference>
     <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\starkbank-ecdsa.1.2.0\lib\net452\StarkbankEcdsa.dll</HintPath>
@@ -377,6 +377,10 @@
     <Compile Include="Migrations\202011031847339_LikedAnimals.Designer.cs">
       <DependentUpon>202011031847339_LikedAnimals.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011131533077_gender.cs" />
+    <Compile Include="Migrations\202011131533077_gender.Designer.cs">
+      <DependentUpon>202011131533077_gender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Animal.cs" />
@@ -402,6 +406,7 @@
     <Content Include="Content\DataTables\css\autoFill.jqueryui.min.css" />
     <Content Include="Content\DataTables\css\autoFill.semanticui.css" />
     <Content Include="Content\DataTables\css\autoFill.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\buttons.bootstrap.css" />
     <Content Include="Content\DataTables\css\buttons.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\buttons.bootstrap4.css" />
@@ -436,10 +441,12 @@
     <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
     <Content Include="Content\DataTables\css\dataTables.material.css" />
     <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\datatables.min.css" />
     <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
     <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
     <Content Include="Content\DataTables\css\dataTables.uikit.css" />
     <Content Include="Content\DataTables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\css\datatables2.min.css" />
     <Content Include="Content\DataTables\css\fixedColumns.bootstrap.css" />
     <Content Include="Content\DataTables\css\fixedColumns.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.css" />
@@ -607,6 +614,7 @@
     <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
     <Content Include="Scripts\DataTables\dataTables.material.js" />
     <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\datatables.min.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
     <Content Include="Scripts\DataTables\dataTables.rowGroup.js" />
@@ -621,6 +629,7 @@
     <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
     <Content Include="Scripts\DataTables\dataTables.uikit.js" />
     <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\datatables2.min.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
@@ -690,6 +699,7 @@
     <Content Include="Views\Animals\Carousel.cshtml" />
     <Content Include="Views\Animals\MyProfile.cshtml" />
     <Content Include="Views\Animals\LikedAnimals.cshtml" />
+    <Content Include="Views\Animals\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -721,6 +731,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011031847339_LikedAnimals.resx">
       <DependentUpon>202011031847339_LikedAnimals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011131533077_gender.resx">
+      <DependentUpon>202011131533077_gender.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

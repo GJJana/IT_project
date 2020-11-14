@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,7 +17,7 @@ using SendGrid;
 using System.Net;
 using System.Configuration;
 using System.Diagnostics;
-
+using SendGrid.Helpers.Mail;
 
 namespace AnimalTinder
 {
@@ -28,32 +30,45 @@ namespace AnimalTinder
         }
         private async Task configSendGridasync(IdentityMessage message)
         {
+            var  apiKey = Environment.GetEnvironmentVariable("SendGridApiKey");
+            var client = new SendGridClient(apiKey);
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
-            myMessage.From = new System.Net.Mail.MailAddress(
-                                "Joe@contoso.com", "Joe S.");
-            myMessage.Subject = message.Subject;
-            myMessage.Text = message.Body;
-            myMessage.Html = message.Body;
-
-            var credentials = new NetworkCredential(
-                       ConfigurationManager.AppSettings["mailAccount"],
-                       ConfigurationManager.AppSettings["mailPassword"]
-                       );
-
-            // Create a Web transport for sending email.
-            var transportWeb = new Web(credentials);
-
-            // Send the email.
-            if (transportWeb != null)
+            myMessage.SetFrom (new EmailAddress(
+                                "jana.gelevska@hotmail.com", "AnimalTinder"));
+            myMessage.SetSubject( message.Subject);
+            myMessage.AddContent(MimeType.Text, message.Body);
+            myMessage.AddContent(MimeType.Html,message.Body);
+            myMessage.SetReplyTo(new EmailAddress("jana.gelevska@hotmail.com", "AnimalTinder"));
+           // var credentials = new NetworkCredential(
+           //         ConfigurationManager.AppSettings["mailAccount"],
+           //      ConfigurationManager.AppSettings["mailPassword"]
+           //     );
+            var response = await client.SendEmailAsync(myMessage);
+            if(client!=null)
             {
-                await transportWeb.DeliverAsync(myMessage);
+                await client.SendEmailAsync(myMessage);
             }
             else
             {
                 Trace.TraceError("Failed to create Web transport.");
                 await Task.FromResult(0);
             }
+
+
+            // Create a Web transport for sending email.
+           // var transportWeb = new Web(credentials);
+
+            // Send the email.
+           // if (transportWeb != null)
+            //{
+             //   await transportWeb.DeliverAsync(myMessage);
+           // }
+            //else
+            //{
+              //  Trace.TraceError("Failed to create Web transport.");
+               // await Task.FromResult(0);
+            //}
         }
     }
 

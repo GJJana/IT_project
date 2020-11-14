@@ -23,12 +23,21 @@ namespace AnimalTinder
                        "~/Scripts/bootstrap.js",
                       "~/Scripts/bootbox.js",
                       "~/Scripts/mdb.min.js",
-                      "~/Scripts/DataTables/dataTables.bootstrap.js",
-                      "~/Scripts/DataTables/jquery.dataTables.js"));
+                      "~/Scripts/popper.min.js",
+                      "~/Scripts/jquery-3.5.1.min.js",
+                      "~/Scripts/DataTables/datatables2.min.js"
+                      )); ;
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css", "~/Content/mdb.min.css", "~/Content/DataTables/css/dataTables.bootstrap.css"));
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/site.css", "~/Content/mdb.min.css",
+                      "~/Content/DataTables/css/datatables2.min.css"
+                      )); ;
         }
     }
 }
+
+    
+   
+ 
+  

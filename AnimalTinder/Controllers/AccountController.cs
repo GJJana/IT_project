@@ -71,6 +71,7 @@ namespace AnimalTinder.Controllers
         {
             if (!ModelState.IsValid)
             {
+                
                 return View(model);
             }
             // Require the user to have a confirmed email before they can log on.
@@ -83,6 +84,11 @@ namespace AnimalTinder.Controllers
                     ViewBag.errorMessage = "You must have a confirmed email to log on.";
                     return View("Error");
                 }
+                //if (Session[0].Equals("UserConfirmedEmail"))
+              //  {
+                //    RedirectToAction("Create", "Animals");
+               // }
+                
             }
 
             // This doesn't count login failures towards account lockout
@@ -101,6 +107,7 @@ namespace AnimalTinder.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+            
         }
 
         //
@@ -168,14 +175,14 @@ namespace AnimalTinder.Controllers
                 if (result.Succeeded)
                 {
                     //prevention to log in until the user is confirmed
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                  // await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                   // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                   // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                      string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
 
                     // Uncomment to debug locally 
                     // TempData["ViewBagLink"] = callbackUrl;
@@ -183,7 +190,7 @@ namespace AnimalTinder.Controllers
                     ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
                                     + "before you can log in.";
 
-
+                    UserManager.AddToRole(user.Id, "User");
                     return RedirectToAction("Create", "Animals");
                 }
                 AddErrors(result);
@@ -203,7 +210,15 @@ namespace AnimalTinder.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            if(result.Succeeded)
+            {
+                Session.Clear();
+                
+                Session["UserConfirmedEmail"] ="Yes";
+                return View("ConfirmEmail");
+            }
+            return View("Error");
         }
 
         //

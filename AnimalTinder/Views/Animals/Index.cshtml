@@ -7,7 +7,7 @@
 <h2>Animals</h2>
 
 
-<table id="animalTable" class="table">
+<table id="animalTable" class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -17,10 +17,13 @@
                 @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sort)
+                @Html.DisplayNameFor(model => model.Breed)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ImgURL)
@@ -35,7 +38,7 @@
 
         @foreach (var item in Model)
         {
-             if (User.Identity.IsAuthenticated && User.Identity.Name.Equals(item.Email))
+            if (User.Identity.IsAuthenticated && User.Identity.Name.Equals(item.Email))
             {
                 continue;
             }
@@ -47,11 +50,13 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sort)
+                @Html.DisplayFor(modelItem => item.Breed)
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
                 <img src="@item.ImgURL" style="max-width:100px" />
@@ -81,7 +86,7 @@
 </table>
 @section scripts{
     <script>
-        $("#animalTable").DataTable();
+        $("#animalTable").DataTable({ pagingType: "full_numbers", });
         $("#animalTable .delete-js").click(function () {
             var button = $(this);
             bootbox.confirm("Dali sakate da go izbrisete filmot?", function (result) {
@@ -98,4 +103,3 @@
         });
     </script>
 }
-

@@ -95,7 +95,7 @@ namespace AnimalTinder.Controllers
             //if the user is already registered he can not create another animal
             foreach (Animal a in db.Animals.ToList())
             {
-                if (User.Identity.GetUserId().Equals(a.userID))
+               // if (User.Identity.GetUserId().Equals(a.userID))
                     return RedirectToAction("MyProfile");
             }
             //types of animals list created
@@ -234,7 +234,7 @@ namespace AnimalTinder.Controllers
         {
             Animal animal = db.Animals.Find(id);
             db.Animals.Remove(animal);
-            db.SaveChanges();
+            db.Users.Remove(db.Users.Find(id));
             return RedirectToAction("Index");
         }
 
