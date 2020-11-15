@@ -381,9 +381,23 @@
     <Compile Include="Migrations\202011131533077_gender.Designer.cs">
       <DependentUpon>202011131533077_gender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011142044483_virtualLikedAnimals.cs" />
+    <Compile Include="Migrations\202011142044483_virtualLikedAnimals.Designer.cs">
+      <DependentUpon>202011142044483_virtualLikedAnimals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011142134104_newTable.cs" />
+    <Compile Include="Migrations\202011142134104_newTable.Designer.cs">
+      <DependentUpon>202011142134104_newTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011142248187_Roles.cs" />
+    <Compile Include="Migrations\202011142248187_Roles.Designer.cs">
+      <DependentUpon>202011142248187_Roles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddToRoleModel.cs" />
     <Compile Include="Models\Animal.cs" />
+    <Compile Include="Models\AnimalLikedAnimal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -705,6 +719,7 @@
     <Content Include="Views\Animals\DeleteLiked.cshtml" />
     <Content Include="Views\Shared\_CreateLayout.cshtml" />
     <Content Include="Views\Account\ConfirmationEmailSent.cshtml" />
+    <Content Include="Views\Account\AddToRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -739,6 +754,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011131533077_gender.resx">
       <DependentUpon>202011131533077_gender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011142044483_virtualLikedAnimals.resx">
+      <DependentUpon>202011142044483_virtualLikedAnimals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011142134104_newTable.resx">
+      <DependentUpon>202011142134104_newTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011142248187_Roles.resx">
+      <DependentUpon>202011142248187_Roles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

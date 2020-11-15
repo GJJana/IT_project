@@ -48,7 +48,11 @@
                         <li>@Html.ActionLink("Carousel", "Carousel", "Animals")</li>
                         <li>@Html.ActionLink("MyProfile", "MyProfile", "Animals")</li>
                     }
-                </ul>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Add User To Role", "AddToRole", "Account")</li>
+                    }
+                    </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

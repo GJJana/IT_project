@@ -4,107 +4,117 @@
     ViewBag.Title = "MyProfile";
 }
 
+<style>
+    .card-body.my-profile .card-text a {
+        /*padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
 
-<div style="height: 100vh">
+        border: solid;
+        border-color: blue;
+        border-radius: 20%;*/
+        border-radius: 16px;
+        padding: 4px 25px;
+        border-color: #7dcfb6;
+        border: solid;
+        color: #7dcfb6;
+        float: right;
+        margin-top: 10px;
+        font-size: 14px;
+        display: block;
+    }
+</style>
 
-    <div class="row" style="height: 50vh;">
-        <div class="col-sm-5" style="background-color: #eab579; min-height: 50vh; padding-top:50px; padding-bottom: 50px">
-            <img class="card-img-top" style="border-radius:100%; max-width: 30%; z-index: 10; margin-left: auto; display: block; margin-right: auto;" src="https://images.unsplash.com/photo-1549034729-513132f66cae?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                 alt="Card image cap">
-            <div class="card" style="margin-top: -70px; padding:40px; padding-top: 110px; background-color: #fff">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
+<div class="container-fluid" style="padding-left: 0px; padding-right: 0px">
+    <div class="row" style="background-color: #eab579;">
+        <div class="col-lg-4 col-md-6 col-sm-12"
+             style="
+            background-color: #eab579;
+            height: auto;
+            padding-top: 50px;
+            padding-bottom: 50px;
+          ">
+            <img style="
+              z-index: 10;
+              position: relative;
+              margin-left: auto;
+              display: block;
+              margin-right: auto;
+              object-fit: cover;
+              border-radius: 50%;
+              height: 150px;
+              width: 150px;
+            "
+                 src="@Model.ImgURL"
+                 alt="Card image cap" />
+
+            <div class="card"
+                 style="
+              margin-top: -70px;
+              padding: 40px;
+              padding-top: 110px;
+              background-color: #fff;
+            ">
+                <div class="card-body my-profile">
+                    <h4 class="card-title text-center">
+                        @Html.DisplayFor(model => model.Name) the @Html.DisplayFor(model => model.Breed)
+                    </h4>
                     <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
+                        @Html.DisplayFor(model => model.Description) <br />
+                        <b>Type: </b> @Html.DisplayFor(model => model.Type) <br />
+                        <b>Age: </b>  @Html.DisplayFor(model => model.Age) <br />
+
+                        <b>Gender: </b> @Html.DisplayFor(model => model.Gender) <br />
+                        <b>Location: </b> @Html.DisplayFor(model => model.Location) <br />
+                        <b>Email: </b> @Html.DisplayFor(model => model.Email) <br />
+
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+                        @Html.ActionLink("Liked Animals", "LikedAnimals", new { id = Model.ID })
                     </p>
-                    <a href="#" class="btn btn-primary">Button</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-7" style="background-color: #82c5ce; min-height: 50vh; padding-top:50px; padding-bottom: 50px">
 
+        <div class="col-lg-8 col-md-6 col-sm-12"
+             style="
+            background-color: #82c5ce;
+            height: auto;
+            padding-right: 30px;
+            padding-top: 35px;
+            padding-bottom: 50px;
+          ">
+            <h3 class="white-text" style="padding-left: 30px; font-weight: 700">
+                Liked Animals
+            </h3>
+            <div class="row" style="margin-top: 47px">
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top"
+                                 style="width: 100%; max-height: 150px "
+                                 src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
+                                 alt="Card image cap" />
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+
+                        <div class="card-body rounded-bottom" style="padding: 20px; background-color: #fff;">
+                            <h4 class="card-title">Card title</h4>
+                            <hr class="hr">
+                            <p class="card-text mb-4">
+                                Some quick example text to build on the card title and make up the bulk
+                                of the card's content.
+                            </p>
+                            <a href="#!" style="display: flex; justify-content: flex-end">
+                                <h5>Details <i class="fas fa-angle-double-right"></i></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <h2>My Profile</h2>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Type)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Type)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Breed)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Breed)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Age)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Age)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Gender)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-
-            <dd>
-                <p>
-                    @Html.DisplayFor(model => model.Description)
-                </p>
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Location)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Location)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ImgURL)
-            </dt>
-
-            <dd>
-                <img src="@Model.ImgURL" style="max-width:100px" />
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-            <dd>
-                @Html.ActionLink("Liked Animals", "LikedAnimals", new { id = Model.ID })
-            </dd>
-            <dd>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
-            </dd>
-        </dl>
-    </div>
+    
 </div>

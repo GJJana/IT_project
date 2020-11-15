@@ -11,6 +11,7 @@ namespace AnimalTinder.Models
     {
         [Key]
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
         
         public string Type { get; set; }
@@ -22,19 +23,16 @@ namespace AnimalTinder.Models
         public string Location { get; set; }
         [Display(Name="Image")]
         public string ImgURL { get; set; }
+        [Required]
         public string Email { get; set; }
-   
 
         public string userID { get; set; }
         
-        public List<Animal> LikedAnimals { get; set; }
+        public virtual ICollection<Animal> LikedAnimals { get; set; }
 
         public Animal()
         {
             LikedAnimals = new List<Animal>();
-           
-
-
 
         }
 

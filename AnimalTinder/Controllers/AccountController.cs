@@ -154,6 +154,42 @@ namespace AnimalTinder.Controllers
             }
         }
 
+
+        // GET: /Account/AddToRole
+        [Authorize(Roles = "Admin")]
+
+        public ActionResult AddToRole()
+        {
+            ViewBag.Roles = new System.Collections.Generic.List<string> { "Admin", "User" };
+            var tmp = new System.Collections.Generic.List<string>();
+            foreach (var u in UserManager.Users)
+            {
+                tmp.Add(u.Email);
+            }
+            ViewBag.Users = tmp;
+            AddToRoleModel model = new AddToRoleModel();
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddToRole(AddToRoleModel model)
+        {
+            if(model==null)
+            {
+                throw new HttpException(404, "There is no user with email: ");
+            }
+            var user = UserManager.FindByEmail(model.Email);
+            UserManager.AddToRole(user.Id, model.Role);
+            return RedirectToAction("Index", "Animals");
+
+
+           
+
+
+           
+           
+        }
+
         //
         // GET: /Account/Register
         [AllowAnonymous]

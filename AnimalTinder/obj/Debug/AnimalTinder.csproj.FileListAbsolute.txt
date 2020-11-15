@@ -147,3 +147,6 @@ C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\bin\StarkbankEcdsa.dll
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\bin\SendGrid.pdb
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\bin\SendGrid.xml
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.gender.resources
+C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.virtualLikedAnimals.resources
+C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.newTable.resources
+C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.Roles.resources

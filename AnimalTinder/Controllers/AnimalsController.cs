@@ -96,6 +96,7 @@ namespace AnimalTinder.Controllers
                     ViewBag.Type = a.Type;
                     ViewBag.LikedAnimals = a.LikedAnimals;
                 }
+                
 
             }
             return View(db.Animals.ToList());
