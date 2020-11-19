@@ -28,14 +28,9 @@ namespace AnimalTinder.Models
 
         public string userID { get; set; }
         
-        public virtual ICollection<Animal> LikedAnimals { get; set; }
+      
 
-        public Animal()
-        {
-            LikedAnimals = new List<Animal>();
-
-        }
-
+       
 
     }
 }

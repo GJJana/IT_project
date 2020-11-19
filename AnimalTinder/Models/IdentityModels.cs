@@ -31,6 +31,6 @@ namespace AnimalTinder.Models
         }
 
         public System.Data.Entity.DbSet<AnimalTinder.Models.Animal> Animals { get; set; }
-        //public System.Data.Entity.DbSet<AnimalTinder.Models.AnimalLikedAnimal> Table { get; set; }
+        public System.Data.Entity.DbSet<AnimalTinder.Models.AnimalLikedAnimal> Table { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace AnimalTinder.Controllers
             {
                 if (a.userID.Equals(userId))
                 {
-                    a.LikedAnimals.Add(animal);
+                    //a.LikedAnimals.Add(animal);
                 }
             }
 
@@ -84,22 +84,14 @@ namespace AnimalTinder.Controllers
             }
 
             */
-            Animal animal = db.Animals.Find(id);
-            if (animal == null)
-            {
-                return NotFound();
-            }
-            //string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            string userId = User.Identity.GetUserId();
-            //string userId = RequestContext.Principal.Identity.;
-            foreach (Animal a in db.Animals.ToList())
-            {
-                if (a.userID.Equals(userId))
-                {
-                    a.LikedAnimals.Add(animal);
-                }
-            }
             
+            
+           //se kreira nov red vo tabelata 
+            string userId = User.Identity.GetUserId();
+            AnimalLikedAnimal animalLiked = new AnimalLikedAnimal();
+            animalLiked.LikedAnimalId = id.ToString();
+            animalLiked.ProfileAnimalId = userId;
+            db.Table.Add(animalLiked);
             db.SaveChanges();
             return StatusCode(HttpStatusCode.NoContent);
             //return Ok(animal);

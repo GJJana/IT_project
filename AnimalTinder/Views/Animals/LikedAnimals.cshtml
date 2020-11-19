@@ -1,50 +1,50 @@
-﻿@model AnimalTinder.Models.Animal
+﻿@model IEnumerable<AnimalTinder.Models.Animal>
 
 @{
     ViewBag.Title = "LikedAnimals";
 }
 
-<h2>LikedAnimals of @Model.Name</h2>
-<h3>@Model.LikedAnimals.Count</h3>
-@foreach (var item in Model.LikedAnimals.ToList())
+<h2>LikedAnimals of @ViewBag.Owner.Name</h2>
+
+@foreach (var item in Model)
 {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Type)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Breed)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Age)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Gender)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Location)
-    </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Breed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
 
-    <td>
-        <img src="@item.ImgURL" style="max-width:100px" />
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Email)
-    </td>
-    <td>
+        <td>
+            <img src="@item.ImgURL" style="max-width:100px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
 
-        @Html.ActionLink("Details", "Details", new { id = item.ID })
-        @Html.ActionLink("Back To Profile", "MyProfile")
-        @Html.ActionLink("Delete", "DeleteLiked", new { id = item.ID })
-
-
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+            @Html.ActionLink("Back To Profile", "MyProfile")
+            @Html.ActionLink("Delete", "DeleteLiked", new { id = item.ID })
 
 
 
-    </td>
-</tr>
+
+
+        </td>
+    </tr>
 }
 

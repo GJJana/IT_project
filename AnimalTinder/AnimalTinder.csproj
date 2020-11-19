@@ -393,6 +393,14 @@
     <Compile Include="Migrations\202011142248187_Roles.Designer.cs">
       <DependentUpon>202011142248187_Roles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011191548328_table.cs" />
+    <Compile Include="Migrations\202011191548328_table.Designer.cs">
+      <DependentUpon>202011191548328_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011191654029_DeleteListLocal.cs" />
+    <Compile Include="Migrations\202011191654029_DeleteListLocal.Designer.cs">
+      <DependentUpon>202011191654029_DeleteListLocal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddToRoleModel.cs" />
@@ -763,6 +771,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011142248187_Roles.resx">
       <DependentUpon>202011142248187_Roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011191548328_table.resx">
+      <DependentUpon>202011191548328_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011191654029_DeleteListLocal.resx">
+      <DependentUpon>202011191654029_DeleteListLocal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

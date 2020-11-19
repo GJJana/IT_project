@@ -150,3 +150,5 @@ C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Mig
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.virtualLikedAnimals.resources
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.newTable.resources
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.Roles.resources
+C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.table.resources
+C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.DeleteListLocal.resources

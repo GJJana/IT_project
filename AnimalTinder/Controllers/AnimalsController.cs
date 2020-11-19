@@ -25,7 +25,7 @@ namespace AnimalTinder.Controllers
         private static string Bucket = "animal-tinder-2020.appspot.com";
         private static string AuthEmail = "tolevska.m8@gmail.com";
         private static string AuthPassword = "Jana1234!";
-        private string ImgLink;
+       
         [Authorize]
         public ActionResult MyProfile()
         {
@@ -49,7 +49,7 @@ namespace AnimalTinder.Controllers
             return View(animal);
         }
 
-        //GET:LikedAnimals
+        //GET:Animals/LikedAnimals
         public ActionResult LikedAnimals(int? id)
         {
 
@@ -58,7 +58,15 @@ namespace AnimalTinder.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Animal animal = db.Animals.Find(id);
-            return View(animal);
+            ViewBag.Owner = animal;
+            //kreira lista od site lajknai zivotni koi se vo Table so Profile id =id 
+            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
+            foreach (AnimalLikedAnimal a in db.Table)
+            {
+                if (a.ProfileAnimalId.Equals(animal.ID.ToString()))
+                    likedAnimals.Add(db.Animals.Find(Int32.Parse(a.LikedAnimalId)));
+            }
+            return View(likedAnimals);
         }
 
         //GET Carousel
@@ -74,11 +82,18 @@ namespace AnimalTinder.Controllers
                 {
                     ViewBag.Gender = a.Gender;
                     ViewBag.Type = a.Type;
-                    ViewBag.LikedAnimals = a.LikedAnimals;
+                    
                 }
 
             }
-            
+            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
+            foreach (AnimalLikedAnimal a in db.Table)
+            {
+                if (a.ProfileAnimalId.Equals(User.Identity.GetUserName()))
+                    likedAnimals.Add(db.Animals.Find(Int32.Parse(a.LikedAnimalId)));
+            }
+            ViewBag.LikedAnimals = likedAnimals;
+
 
             return View(db.Animals.ToList());
         }
@@ -94,11 +109,18 @@ namespace AnimalTinder.Controllers
                 {
                     ViewBag.Gender = a.Gender;
                     ViewBag.Type = a.Type;
-                    ViewBag.LikedAnimals = a.LikedAnimals;
                 }
+
                 
 
             }
+            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
+            foreach (AnimalLikedAnimal a in db.Table)
+            {
+                if (a.ProfileAnimalId.Equals(User.Identity.GetUserName()))
+                    likedAnimals.Add(db.Animals.Find(Int32.Parse(a.LikedAnimalId)));
+            }
+            ViewBag.LikedAnimals = likedAnimals;
             return View(db.Animals.ToList());
         }
 
@@ -293,12 +315,12 @@ namespace AnimalTinder.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmedLiked(int id)
         {
-            Animal animal = db.Animals.Find(id);
+            //Animal animal = db.Animals.Find(id);
             string userId = User.Identity.GetUserId();
-            foreach(Animal a in db.Animals.ToList())
+            foreach(AnimalLikedAnimal a in db.Table.ToList())
             {
-                if (userId.Equals(a.userID))
-                    a.LikedAnimals.Remove(animal);
+                if (userId.Equals(a.ProfileAnimalId) && id.ToString().Equals(a.LikedAnimalId))
+                    db.Table.Remove(a);
             }
             db.SaveChanges();
            
