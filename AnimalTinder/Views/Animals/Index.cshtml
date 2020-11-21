@@ -3,116 +3,155 @@
 @{
     ViewBag.Title = "Animals";
 }
+<style>
+    #animalTable_wrapper {
+        padding: 50px 50px 30px 50px;
+        background-color: #fff;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 6px #00000061;
+    }
 
-    <div class="container">
-        <h2>Animals</h2>
-        <hr />
-        <table id="animalTable" class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Type)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Breed)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Age)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Gender)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Location)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ImgURL)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
+    table.table-hover tbody tr:hover {
+        background-color: #ebebeb7d;
+    }
 
-                @foreach (var item in Model)
+    .delete-icon, details-icon {
+        font-size: 13px;
+    }
+
+    .table > tbody > tr > td {
+        vertical-align: middle;
+        font-size: 11px;
+    }
+
+    div.dataTables_wrapper div.dataTables_length select, div.dataTables_wrapper div.dataTables_length input {
+        display: inline-block;
+        padding-left: 6px;
+        padding-right: 0px;
+    }
+
+    .table > thead:first-child > tr:first-child > th {
+        font-size: 11px;
+    }
+</style>
+
+<div class="container-fluid">
+    <h2>Animals</h2>
+    <hr />
+    <table id="animalTable" class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Breed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImgURL)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                if (User.Identity.IsAuthenticated && User.Identity.Name.Equals(item.Email) || @ViewBag.LikedAnimals.Contains(item) || item.Gender.Equals(ViewBag.Gender) || (@ViewBag.Type != "All" && !item.Type.Equals(@ViewBag.Type)))
                 {
-                    if (User.Identity.IsAuthenticated && User.Identity.Name.Equals(item.Email) ||@ViewBag.LikedAnimals.Contains(item)|| item.Gender.Equals(ViewBag.Gender) || (@ViewBag.Type != "All" && !item.Type.Equals(@ViewBag.Type)))
-                    {
-                        continue;
-                    }
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Type)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Breed)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Age)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Gender)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Location)
-                        </td>
-
-                        <td>
-                            <img src="@item.ImgURL" style="max-width:100px" />
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-
-                            @Html.ActionLink("Details", "Details", new { id = item.ID })
-                            <button> Report</button>
-                           
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <button type="button" class="btn-link delete-js" data-id="@item.ID" data-toggle="modal" data-target="#basicExampleModal">Delete</button>
-                            }
-                        </td>
-                    </tr>
+                    continue;
                 }
-            </tbody>
-        </table>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Breed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
 
-        <!-- Modal -->
-        <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this user(animal)?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="yes-delete-it" data-dismiss="modal">Yes, delete it.</button>
-                    </div>
+                    <td>
+                        <img src="@item.ImgURL" style="max-width:100px" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <button type="button" class="btn-link delete-js" data-id="@item.ID" data-toggle="modal" data-target="#basicExampleModal">
+                                <i class="fas fa-trash delete-icon"></i>
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this user(animal)?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="yes-delete-it" data-dismiss="modal">Yes, delete it.</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 @section scripts{
     <script>
         $(document).ready(function () {
-            var table = $("#animalTable").DataTable({ pagingType: "full_numbers", });
+            var table = $("#animalTable").DataTable({
+                pagingType: "full_numbers",
+                oLanguage: {
+
+                    sSearch: "",
+                    sSearchPlaceholder: "Search",
+                }
+            });
             var button;
             $("#animalTable .delete-js").on("click", function () {
                 button = $(this);

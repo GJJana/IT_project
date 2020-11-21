@@ -28,8 +28,8 @@
         }
 
         .carousel-indicators {
-            bottom: 0px;
             z-index: 0;
+            bottom: -35px;
         }
 
         /* media screen and (min-width: 768px)
@@ -48,10 +48,10 @@
             @{var i = 0;}
             @foreach (var item in Model)
             {
-                if (User.Identity.IsAuthenticated && User.Identity.Name.Equals(item.Email) ||@ViewBag.LikedAnimals.Contains(item)||item.Gender.Equals(ViewBag.Gender) || (@ViewBag.Type != "All" && !item.Type.Equals(@ViewBag.Type)))
+                if (User.Identity.IsAuthenticated && User.Identity.Name.Equals(item.Email) || @ViewBag.LikedAnimals.Contains(item) || item.Gender.Equals(ViewBag.Gender) || (@ViewBag.Type != "All" && !item.Type.Equals(@ViewBag.Type)))
                 {
                     continue;
-                    
+
                 }
                 var active = i == 0 ? "active" : "";
                 <div class="item @active">
@@ -117,7 +117,7 @@
             var button;
             $("#LikeAnimal").on("click", function () {
                 button = $(this);
-                 $.ajax({
+                $.ajax({
                     url: "/api/Animals1/" + button.attr("data-id"),
                     method: "PUT",
                     success: function () {
