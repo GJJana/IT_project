@@ -46,6 +46,7 @@
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
             @{var i = 0;}
+          
             @foreach (var item in Model)
             {
                 if (User.Identity.IsAuthenticated && User.Identity.Name.Equals(item.Email) || @ViewBag.LikedAnimals.Contains(item) || item.Gender.Equals(ViewBag.Gender) || (@ViewBag.Type != "All" && !item.Type.Equals(@ViewBag.Type)))
@@ -83,9 +84,8 @@
                             </a>
                             <a href="#carousel-example-2" role="button" data-slide="next">
                                 <button type="button"
-                                        id="LikeAnimal"
                                         data-id="@item.ID"
-                                        class="btn waves-effect"
+                                        class="btn waves-effect like-animal"
                                         style="
                 border-radius: 16px;
                 padding: 11px 25px;
@@ -103,7 +103,7 @@
                     </div>
 
                 </div>
-                i = 1;
+                i += 1;
             }
 
         </div>
@@ -115,8 +115,9 @@
     <script>
         $(document).ready(function () {
             var button;
-            $("#LikeAnimal").on("click", function () {
+            $(".like-animal").on("click", function () {
                 button = $(this);
+           
                 $.ajax({
                     url: "/api/Animals1/" + button.attr("data-id"),
                     method: "PUT",
@@ -126,6 +127,7 @@
                 });
             });
         });
+        
     </script>
 
 }

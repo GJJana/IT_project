@@ -1,94 +1,96 @@
 ﻿@model AnimalTinder.Models.Animal
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "DeleteLiked";
 }
 
-<h2>Delete</h2>
+<style>
+    .card-body.my-profile .card-text a input {
+        /*padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Animal</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Breed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Breed)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImgURL)
-        </dt>
-
-        <dd>
-            <img src="@Model.ImgURL" style="max-width:100px" />
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.userID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.userID)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+        border: solid;
+        border-color: blue;
+        border-radius: 20%;*/
+        border-radius: 16px;
+        padding: 4px 25px;
+        border-color: #7dcfb6;
+        border: solid;
+        color: #7dcfb6;
+        float: right;
+        margin-top: 10px;
+        font-size: 14px;
+        display: block;
     }
+
+        .card-body.my-profile .card-text a.back-button {
+            float: left;
+        }
+</style>
+
+<div class="container" style="padding-left: 0px; padding-right: 0px">
+    <div class="row" style="">
+        <div class="col"
+             style="
+            height: auto;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+          ">
+            <img style="
+              z-index: 10;
+              position: relative;
+              margin-left: auto;
+              display: block;
+              margin-right: auto;
+              object-fit: cover;
+              border-radius: 50%;
+              height: 150px;
+              width: 150px;
+            "
+                 src="@Model.ImgURL"
+                 alt="Card image cap" />
+
+            <div class="card"
+                 style="
+              margin-top: -70px;
+              padding: 40px;
+              padding-top: 110px;
+              background-color: #fff;
+            ">
+                <div class="card-body my-profile">
+                    <h4 class="card-title text-center">
+                        @Html.DisplayFor(model => model.Name) the @Html.DisplayFor(model => model.Breed)
+                    </h4>
+                    <p class="card-text">
+                        @Html.DisplayFor(model => model.Description) <br />
+                        <b>Type: </b> @Html.DisplayFor(model => model.Type) <br />
+                        <b>Age: </b>  @Html.DisplayFor(model => model.Age) <br />
+
+                        <b>Gender: </b> @Html.DisplayFor(model => model.Gender) <br />
+                        <b>Location: </b> @Html.DisplayFor(model => model.Location) <br />
+                        <b>Email: </b> @Html.DisplayFor(model => model.Email) <br />
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-default" />
+                                @Html.ActionLink("Back to List", "Index", "Animals", null, new { @class = "back-button" })
+
+                            </div>
+
+
+                        }
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

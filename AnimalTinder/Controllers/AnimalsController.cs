@@ -25,6 +25,8 @@ namespace AnimalTinder.Controllers
         private static string Bucket = "animal-tinder-2020.appspot.com";
         private static string AuthEmail = "tolevska.m8@gmail.com";
         private static string AuthPassword = "Jana1234!";
+        private static string Page = "Index";
+        
        
         [Authorize]
         public ActionResult MyProfile()
@@ -40,10 +42,24 @@ namespace AnimalTinder.Controllers
                 }
             }
 
-            if (animal == null)
+            if (animal.Name == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Create");
             }
+            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
+            //tmp list of AnimalLikedAnimal to avoid two parallel calls to database 
+            List<AnimalLikedAnimal> tmp = db.AnimalLikedAnimals.ToList();
+            foreach (AnimalLikedAnimal a in tmp)
+            {
+                if (a.ProfileAnimalId == animal.ID)
+                {
+                    Animal ani = db.Animals.Find(a.LikedAnimalId);
+                    likedAnimals.Add(ani);
+                }
+
+            }
+            ViewBag.LikedAnimalsProfile = likedAnimals;
+            Page = "MyProfile";
 
 
             return View(animal);
@@ -59,12 +75,18 @@ namespace AnimalTinder.Controllers
             }
             Animal animal = db.Animals.Find(id);
             ViewBag.Owner = animal;
-            //kreira lista od site lajknai zivotni koi se vo Table so Profile id =id 
+            //creates a list of liked animals for this user
             List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
-            foreach (AnimalLikedAnimal a in db.Table)
+            //tmp list of AnimalLikedAnimal to avoid two parallel calls to database 
+            List<AnimalLikedAnimal> tmp = db.AnimalLikedAnimals.ToList();
+            foreach (AnimalLikedAnimal a in tmp)
             {
-                if (a.ProfileAnimalId.Equals(animal.ID.ToString()))
-                    likedAnimals.Add(db.Animals.Find(Int32.Parse(a.LikedAnimalId)));
+                if (a.ProfileAnimalId==animal.ID)
+                {
+                    Animal ani=db.Animals.Find(a.LikedAnimalId);
+                    likedAnimals.Add(ani);
+                }
+                    
             }
             return View(likedAnimals);
         }
@@ -74,7 +96,9 @@ namespace AnimalTinder.Controllers
         {
             ViewBag.Gender = "Non-Binery";
             ViewBag.Type = "All";
-            
+            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
+            //tmp list of AnimalLikedAnimal to avoid two parallel calls to database 
+            List<AnimalLikedAnimal> tmp = db.AnimalLikedAnimals.ToList();
 
             foreach (Animal a in db.Animals.ToList())
             {
@@ -82,16 +106,19 @@ namespace AnimalTinder.Controllers
                 {
                     ViewBag.Gender = a.Gender;
                     ViewBag.Type = a.Type;
-                    
+                    foreach (AnimalLikedAnimal la in tmp)
+                    {
+                        if (la.ProfileAnimalId.Equals(a.ID))
+                            likedAnimals.Add(db.Animals.Find(la.LikedAnimalId));
+                        
+
+                    }
+
                 }
 
             }
-            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
-            foreach (AnimalLikedAnimal a in db.Table)
-            {
-                if (a.ProfileAnimalId.Equals(User.Identity.GetUserName()))
-                    likedAnimals.Add(db.Animals.Find(Int32.Parse(a.LikedAnimalId)));
-            }
+            
+            
             ViewBag.LikedAnimals = likedAnimals;
 
 
@@ -102,25 +129,28 @@ namespace AnimalTinder.Controllers
         {
             ViewBag.Gender = "Non-Binery";
             ViewBag.Type = "All";
-            
-            foreach(Animal a in db.Animals.ToList())
+            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
+            //tmp list of AnimalLikedAnimal to avoid two parallel calls to database 
+            List<AnimalLikedAnimal> tmp = db.AnimalLikedAnimals.ToList();
+
+            foreach (Animal a in db.Animals.ToList())
             {
                 if (a.Email.Equals(User.Identity.GetUserName()))
                 {
                     ViewBag.Gender = a.Gender;
                     ViewBag.Type = a.Type;
+                    //creates a list of liked animals 
+                    foreach (AnimalLikedAnimal la in tmp)
+                    {
+                        if (la.ProfileAnimalId.Equals(a.ID))
+                            likedAnimals.Add(db.Animals.Find(la.LikedAnimalId));
+                    }
                 }
+ 
 
-                
-
-            }
-            List<Animal> likedAnimals = new System.Collections.Generic.List<Animal>();
-            foreach (AnimalLikedAnimal a in db.Table)
-            {
-                if (a.ProfileAnimalId.Equals(User.Identity.GetUserName()))
-                    likedAnimals.Add(db.Animals.Find(Int32.Parse(a.LikedAnimalId)));
             }
             ViewBag.LikedAnimals = likedAnimals;
+            Page = "Index";
             return View(db.Animals.ToList());
         }
 
@@ -136,6 +166,7 @@ namespace AnimalTinder.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.PreviousPage = Page;
             return View(animal);
         }
 
@@ -145,12 +176,15 @@ namespace AnimalTinder.Controllers
             //if the user is already registered he can not create another animal
            foreach (Animal a in db.Animals.ToList())
            {
-              if (User.Identity.GetUserId().Equals(a.userID))
-                   return RedirectToAction("MyProfile");
+                if (User.Identity.GetUserId().Equals(a.userID))
+                {
+                    Session["UserAnimalID"] = a.ID;
+                    return RedirectToAction("MyProfile");
+                }
            }
             //types of animals list created
             Animal animal = new Animal();
-            List<string> tmp= new System.Collections.Generic.List<string> { "Dog", "Turtle", "Rabbit", "Parrot", "Cat", "Fish", "Mouse", "Hamster", "Cow", "Duck", "Shrimp", "Pig", "Goat", "Crab", "Deer", "Bee", "Sheep", "Turkey", "Dove", "Chicken", "Horse", "Bird", "Squirrel", "Ox", "Lion", "Panda", "Walrus", "Otter", "Kangaroo", "Monkey", "Koala", "Mole", "Elephant", "Leopard", "Hippopotamus", "Giraffe", "Fox", "Coyote", "Hedgehong", "Camel", "Starfish", "Alligator", "Owl", "Tiger", "Bear", "Whale", "Raccoon", "Crocodile", "Dolphin", "Snake", "Elk", "Bat", "Hare", "Toad", "Frog", "Rat", "Badger", "Lizard", "Reindeer", "Insect" };
+            List<string> tmp = new System.Collections.Generic.List<string> { "Dog", "Turtle", "Rabbit", "Parrot", "Cat", "Fish", "Mouse", "Hamster", "Cow", "Duck", "Shrimp", "Pig", "Goat", "Crab", "Deer", "Bee", "Sheep", "Turkey", "Dove", "Chicken", "Horse", "Bird", "Squirrel", "Ox", "Lion", "Panda", "Walrus", "Otter", "Kangaroo", "Monkey", "Koala", "Mole", "Elephant", "Leopard", "Hippopotamus", "Giraffe", "Fox", "Coyote", "Hedgehong", "Camel", "Starfish", "Alligator", "Owl", "Tiger", "Bear", "Whale", "Raccoon", "Crocodile", "Dolphin", "Snake", "Elk", "Bat", "Hare", "Toad", "Frog", "Rat", "Badger", "Lizard", "Reindeer", "Insect" };
             tmp.Sort();
             ViewBag.AnimalsType = tmp;
             ViewBag.AnimalsGender = new System.Collections.Generic.List<string> { "Male", "Female" };
@@ -162,17 +196,17 @@ namespace AnimalTinder.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name,Type,Breed,Age,Gender,ImgURL")] Animal animal, HttpPostedFileBase file)
+        public async Task<ActionResult> Create([Bind(Include = "ID, Name, Type, Breed, Age, Gender, Description, Location, ImgURL, Email")] Animal animal, HttpPostedFileBase file)
         {
 
             FileStream stream;
+            //get the loged user ID and email
+            animal.userID = User.Identity.GetUserId();
+            animal.Email = User.Identity.GetUserName();
 
-
-            if (ModelState.IsValid)
+            if (animal!=null&& animal.Type!= null&&animal.Gender!=null&& animal.Location!= null)
             {
-                //get the loged user ID and email
-                animal.userID = User.Identity.GetUserId();
-                animal.Email = User.Identity.GetUserName();
+                
                 //if the user uplouded an img
                 if (file?.ContentLength > 0)
                 {
@@ -196,6 +230,10 @@ namespace AnimalTinder.Controllers
 
                 return RedirectToAction("Index");
             }
+            List<string> tmp = new System.Collections.Generic.List<string> { "Dog", "Turtle", "Rabbit", "Parrot", "Cat", "Fish", "Mouse", "Hamster", "Cow", "Duck", "Shrimp", "Pig", "Goat", "Crab", "Deer", "Bee", "Sheep", "Turkey", "Dove", "Chicken", "Horse", "Bird", "Squirrel", "Ox", "Lion", "Panda", "Walrus", "Otter", "Kangaroo", "Monkey", "Koala", "Mole", "Elephant", "Leopard", "Hippopotamus", "Giraffe", "Fox", "Coyote", "Hedgehong", "Camel", "Starfish", "Alligator", "Owl", "Tiger", "Bear", "Whale", "Raccoon", "Crocodile", "Dolphin", "Snake", "Elk", "Bat", "Hare", "Toad", "Frog", "Rat", "Badger", "Lizard", "Reindeer", "Insect" };
+            tmp.Sort();
+            ViewBag.AnimalsType = tmp;
+            ViewBag.AnimalsGender = new System.Collections.Generic.List<string> { "Male", "Female" };
 
             return View(animal);
         }
@@ -240,7 +278,7 @@ namespace AnimalTinder.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Animal animal = new Animal();
+            Animal animal = db.Animals.Find(id);
             List<string> tmp = new System.Collections.Generic.List<string> { "Dog", "Turtle", "Rabbit", "Parrot", "Cat", "Fish", "Mouse", "Hamster", "Cow", "Duck", "Shrimp", "Pig", "Goat", "Crab", "Deer", "Bee", "Sheep", "Turkey", "Dove", "Chicken", "Horse", "Bird", "Squirrel", "Ox", "Lion", "Panda", "Walrus", "Otter", "Kangaroo", "Monkey", "Koala", "Mole", "Elephant", "Leopard", "Hippopotamus", "Giraffe", "Fox", "Coyote", "Hedgehong", "Camel", "Starfish", "Alligator", "Owl", "Tiger", "Bear", "Whale", "Raccoon", "Crocodile", "Dolphin", "Snake", "Elk", "Bat", "Hare", "Toad", "Frog", "Rat", "Badger", "Lizard", "Reindeer", "Insect" };
             tmp.Sort();
             ViewBag.AnimalsType = tmp;
@@ -258,14 +296,44 @@ namespace AnimalTinder.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Type,Breed,Age,Gender,ImgURL,Email")] Animal animal)
+        public async Task<ActionResult> Edit([Bind(Include = "ID, Name, Type, Breed, Age, Gender, Description, Location, Email, ImgURL")] Animal animal, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            FileStream stream;
+            //get the loged user ID and email
+            animal.userID = User.Identity.GetUserId();
+            animal.Email = User.Identity.GetUserName();
+
+            if (animal != null && animal.Type != null && animal.Gender != null && animal.Location != null)
             {
-                db.Entry(animal).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                
+                if (file?.ContentLength > 0)
+                  {
+                        string path = Path.Combine(Server.MapPath("~/Content/images/"), file.FileName);
+                        file.SaveAs(path);
+                        stream = new FileStream(Path.Combine(path), FileMode.Open);
+                        Task<string> link = Task.Run(() => Upload(stream, file.FileName));
+                        await link.ContinueWith(m =>
+                        {
+                            //Console.WriteLine(m);
+                            animal.ImgURL = m.Result;
+                            db.Entry(animal).State = EntityState.Modified;
+                            db.SaveChanges();
+                            
+                        });
+                    }
+                    else
+                    {
+
+                        db.Entry(animal).State = EntityState.Modified;
+                        db.SaveChanges();
+                        
+                    }
+                return RedirectToAction("MyProfile");
             }
+            List<string> tmp = new System.Collections.Generic.List<string> { "Dog", "Turtle", "Rabbit", "Parrot", "Cat", "Fish", "Mouse", "Hamster", "Cow", "Duck", "Shrimp", "Pig", "Goat", "Crab", "Deer", "Bee", "Sheep", "Turkey", "Dove", "Chicken", "Horse", "Bird", "Squirrel", "Ox", "Lion", "Panda", "Walrus", "Otter", "Kangaroo", "Monkey", "Koala", "Mole", "Elephant", "Leopard", "Hippopotamus", "Giraffe", "Fox", "Coyote", "Hedgehong", "Camel", "Starfish", "Alligator", "Owl", "Tiger", "Bear", "Whale", "Raccoon", "Crocodile", "Dolphin", "Snake", "Elk", "Bat", "Hare", "Toad", "Frog", "Rat", "Badger", "Lizard", "Reindeer", "Insect" };
+            tmp.Sort();
+            ViewBag.AnimalsType = tmp;
+            ViewBag.AnimalsGender = new System.Collections.Generic.List<string> { "Male", "Female" };
             return View(animal);
         }
 
@@ -315,12 +383,14 @@ namespace AnimalTinder.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmedLiked(int id)
         {
-            //Animal animal = db.Animals.Find(id);
-            string userId = User.Identity.GetUserId();
-            foreach(AnimalLikedAnimal a in db.Table.ToList())
+            int UserAnimalID =(int)Session["UserAnimalID"] ;
+           
+            //tmp list of AnimalLikedAnimal to avoid two parallel calls to database 
+            List<AnimalLikedAnimal> tmp = db.AnimalLikedAnimals.ToList();
+            foreach (AnimalLikedAnimal a in tmp)
             {
-                if (userId.Equals(a.ProfileAnimalId) && id.ToString().Equals(a.LikedAnimalId))
-                    db.Table.Remove(a);
+                if (UserAnimalID==a.ProfileAnimalId && id==a.LikedAnimalId)
+                    db.AnimalLikedAnimals.Remove(a);
             }
             db.SaveChanges();
            

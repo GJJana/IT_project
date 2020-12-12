@@ -88,10 +88,17 @@ namespace AnimalTinder.Controllers
             
            //se kreira nov red vo tabelata 
             string userId = User.Identity.GetUserId();
+            int userAnimalID = 0;
+            foreach(Animal a in db.Animals)
+            {
+                if (a.userID.Equals(userId))
+                    userAnimalID = a.ID;
+
+            }
             AnimalLikedAnimal animalLiked = new AnimalLikedAnimal();
-            animalLiked.LikedAnimalId = id.ToString();
-            animalLiked.ProfileAnimalId = userId;
-            db.Table.Add(animalLiked);
+            animalLiked.LikedAnimalId = id;
+            animalLiked.ProfileAnimalId = userAnimalID;
+            db.AnimalLikedAnimals.Add(animalLiked);
             db.SaveChanges();
             return StatusCode(HttpStatusCode.NoContent);
             //return Ok(animal);

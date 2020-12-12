@@ -11,10 +11,10 @@ namespace AnimalTinder.Models
     {
         [Key]
         [Column(Order=0)]
-        public string ProfileAnimalId { get; set; }
+        public int ProfileAnimalId { get; set; }
         [Key]
         [Column(Order = 1)]
-        public string LikedAnimalId { get; set; }
+        public int LikedAnimalId { get; set; }
 
 
     }

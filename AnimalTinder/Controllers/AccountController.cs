@@ -98,6 +98,8 @@ namespace AnimalTinder.Controllers
             {
                 case SignInStatus.Success:
                     UserManager.AddToRole(user.Id, "User");
+
+                    //checks if user has profile , if he does it redisrects to MyProfile
                     return RedirectToAction("Create", "Animals");
                 case SignInStatus.LockedOut:
                     return View("Lockout");

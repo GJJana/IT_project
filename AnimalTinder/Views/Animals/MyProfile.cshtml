@@ -70,12 +70,10 @@
                         <b>Email: </b> @Html.DisplayFor(model => model.Email) <br />
 
                         @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
-                        @Html.ActionLink("Liked Animals", "LikedAnimals", new { id = Model.ID })
                     </p>
                 </div>
             </div>
         </div>
-
         <div class="col-lg-8 col-md-6 col-sm-12"
              style="
             background-color: #82c5ce;
@@ -88,33 +86,48 @@
                 Liked Animals
             </h3>
             <div class="row" style="margin-top: 47px">
-                <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <div class="view overlay">
-                            <img class="card-img-top"
-                                 style="width: 100%; max-height: 150px "
-                                 src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
-                                 alt="Card image cap" />
-                            <a href="#!">
-                                <div class="mask rgba-white-slight"></div>
-                            </a>
-                        </div>
 
-                        <div class="card-body rounded-bottom" style="padding: 20px; background-color: #fff;">
-                            <h4 class="card-title">Card title</h4>
-                            <hr class="hr">
-                            <p class="card-text mb-4">
-                                Some quick example text to build on the card title and make up the bulk
-                                of the card's content.
-                            </p>
-                            <a href="#!" style="display: flex; justify-content: flex-end">
-                                <h5>Details <i class="fas fa-angle-double-right"></i></h5>
-                            </a>
+                @foreach (AnimalTinder.Models.Animal item in @ViewBag.LikedAnimalsProfile)
+                {
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="view overlay">
+                                <img class="card-img-top"
+                                     style="width: 100%; max-height: 150px "
+                                     src="@item.ImgURL"
+                                     alt="Card image cap" />
+                                <a href="#!">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+
+                            <div class="card-body rounded-bottom" style="padding: 20px; background-color: #fff;">
+                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name) the @Html.DisplayFor(modelItem => item.Breed)</h4>
+                                <hr class="hr">
+                                <p class="card-text mb-4">
+                                    @Html.DisplayFor(modelItem => item.Description) <br />
+                                    <b>Type: </b> @Html.DisplayFor(modelItem => item.Type) <br />
+                                    <b>Age: </b>  @Html.DisplayFor(modelItem => item.Age) <br />
+
+                                    <b>Gender: </b> @Html.DisplayFor(modelItem => item.Gender) <br />
+                                    <b>Location: </b> @Html.DisplayFor(modelItem => item.Location) <br />
+                                    <b>Email: </b> @Html.DisplayFor(modelItem => item.Email) <br />
+
+                                </p>
+                                <a href="#!" style="display: flex; justify-content: flex-end">
+                                    <h5 style="display: inline-block; margin-right: 20px;">
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                    </h5>
+                                    <h5  style="display: inline-block;">
+                                        @Html.ActionLink("Delete", "DeleteLiked", new { id = item.ID })
+                                    </h5>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>
-    
+
 </div>
