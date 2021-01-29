@@ -405,6 +405,14 @@
     <Compile Include="Migrations\202012111517047_intKeyAnimalLIkedAnimal.Designer.cs">
       <DependentUpon>202012111517047_intKeyAnimalLIkedAnimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101292057328_NewReq.cs" />
+    <Compile Include="Migrations\202101292057328_NewReq.Designer.cs">
+      <DependentUpon>202101292057328_NewReq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202101292102496_NewReqGender.cs" />
+    <Compile Include="Migrations\202101292102496_NewReqGender.Designer.cs">
+      <DependentUpon>202101292102496_NewReqGender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddToRoleModel.cs" />
@@ -784,6 +792,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012111517047_intKeyAnimalLIkedAnimal.resx">
       <DependentUpon>202012111517047_intKeyAnimalLIkedAnimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101292057328_NewReq.resx">
+      <DependentUpon>202101292057328_NewReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101292102496_NewReqGender.resx">
+      <DependentUpon>202101292102496_NewReqGender.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

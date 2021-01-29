@@ -58,11 +58,11 @@ namespace AnimalTinder
               appId: "837504663720144",
              appSecret: "0a2c589002eac231b931334610523cd2");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-               ClientId = "978803291023-0v8oqm7ac2c3d2t6ngofndrdkc5414g2.apps.googleusercontent.com",
-               ClientSecret = "Zq1hmDEOuxT-8Bx1SRq34lmI"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+              // ClientId = "978803291023-6lq9lrhvcq3b7cp7jlme2ljaror3sekq.apps.googleusercontent.com",
+               //ClientSecret = "KwJ71Xmejvig5cn5syftj8Z7"
+            //});
         }
     }
 }

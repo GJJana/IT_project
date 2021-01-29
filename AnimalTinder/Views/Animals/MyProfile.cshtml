@@ -5,34 +5,24 @@
 }
 
 <style>
-    .card-body.my-profile .card-text a {
-        /*padding-left: 15px;
-        padding-right: 15px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-
-        border: solid;
-        border-color: blue;
-        border-radius: 20%;*/
-        border-radius: 16px;
-        padding: 4px 25px;
-        border-color: #7dcfb6;
-        border: solid;
-        color: #7dcfb6;
+    .edit-btn {
         float: right;
-        margin-top: 10px;
-        font-size: 14px;
-        display: block;
+    }
+
+    @@media only screen and (max-width: 992px) {
+        .card-img-top {
+            object-fit: contain;
+        }
     }
 </style>
 
-<div class="container-fluid" style="padding-left: 0px; padding-right: 0px">
-    <div class="row" style="background-color: #eab579;">
+<div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+    <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12"
              style="
-            background-color: #eab579;
             height: auto;
             padding-top: 50px;
+            max-width: 450px;
             padding-bottom: 50px;
           ">
             <img style="
@@ -54,57 +44,57 @@
               margin-top: -70px;
               padding: 40px;
               padding-top: 110px;
-              background-color: #fff;
+              background-color: #eab579;
             ">
                 <div class="card-body my-profile">
-                    <h4 class="card-title text-center">
+                    <h3 class="card-title text-center" style="color: #186860; font-weight: 700; margin-bottom: 30px;">
                         @Html.DisplayFor(model => model.Name) the @Html.DisplayFor(model => model.Breed)
-                    </h4>
-                    <p class="card-text">
-                        @Html.DisplayFor(model => model.Description) <br />
+                    </h3>
+                    <p class="card-text" style="font-size: 14px; color: #186860; margin-bottom: 30px;">
                         <b>Type: </b> @Html.DisplayFor(model => model.Type) <br />
                         <b>Age: </b>  @Html.DisplayFor(model => model.Age) <br />
 
                         <b>Gender: </b> @Html.DisplayFor(model => model.Gender) <br />
                         <b>Location: </b> @Html.DisplayFor(model => model.Location) <br />
                         <b>Email: </b> @Html.DisplayFor(model => model.Email) <br />
-
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
                     </p>
+                    <div style="display: flex; justify-content: center; ">
+                        @Html.ActionLink("Edit", "Edit", "Animals", new { id = Model.ID }, new { @class = "btn btn-default edit-btn" })
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="col-lg-8 col-md-6 col-sm-12"
              style="
-            background-color: #82c5ce;
             height: auto;
             padding-right: 30px;
             padding-top: 35px;
             padding-bottom: 50px;
           ">
-            <h3 class="white-text" style="padding-left: 30px; font-weight: 700">
+            <h3 style="padding-left: 30px; font-weight: 700">
                 Liked Animals
             </h3>
             <div class="row" style="margin-top: 47px">
-
                 @foreach (AnimalTinder.Models.Animal item in @ViewBag.LikedAnimalsProfile)
-                {
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
-                        <div class="card">
-                            <div class="view overlay">
+                 {
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4" style="display: flex; justify-content: center">
+
+                        <div class="card" style="background-color: #82c5ce; max-width: 300px;">
+                            <div class="view overlay" style="background-color: white;">
                                 <img class="card-img-top"
-                                     style="width: 100%; max-height: 150px "
+                                     style="width: 100%; max-height: 200px;"
                                      src="@item.ImgURL"
                                      alt="Card image cap" />
-                                <a href="#!">
+                                
                                     <div class="mask rgba-white-slight"></div>
-                                </a>
+                                
                             </div>
 
                             <div class="card-body rounded-bottom" style="padding: 20px; background-color: #fff;">
                                 <h4 class="card-title">@Html.DisplayFor(modelItem => item.Name) the @Html.DisplayFor(modelItem => item.Breed)</h4>
                                 <hr class="hr">
-                                <p class="card-text mb-4">
+                                <p class="card-text mb-4" style="font-size: 14px">
                                     @Html.DisplayFor(modelItem => item.Description) <br />
                                     <b>Type: </b> @Html.DisplayFor(modelItem => item.Type) <br />
                                     <b>Age: </b>  @Html.DisplayFor(modelItem => item.Age) <br />
@@ -112,20 +102,21 @@
                                     <b>Gender: </b> @Html.DisplayFor(modelItem => item.Gender) <br />
                                     <b>Location: </b> @Html.DisplayFor(modelItem => item.Location) <br />
                                     <b>Email: </b> @Html.DisplayFor(modelItem => item.Email) <br />
-
                                 </p>
-                                <a href="#!" style="display: flex; justify-content: flex-end">
-                                    <h5 style="display: inline-block; margin-right: 20px;">
-                                        @Html.ActionLink("Details", "Details", new { id = item.ID })
-                                    </h5>
-                                    <h5  style="display: inline-block;">
-                                        @Html.ActionLink("Delete", "DeleteLiked", new { id = item.ID })
-                                    </h5>
-                                </a>
+                                <div style="display: flex; align-items: center; justify-content: space-between;">
+                                    <a href="#!" style="display: none;">
+                                        <h5 style="display: inline-block;">
+                                            @Html.ActionLink("Delete", "DeleteLiked", "Animals", new { id = item.ID }, new { @class = "btn btn-outline-default" })
+                                        </h5>
+                                        <h5 style="display: inline-block;">
+                                            @Html.ActionLink("Details", "Details", "Animals", new { id = item.ID }, new { @class = "btn btn-default" })
+                                        </h5>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                }
+                 }
             </div>
         </div>
     </div>

@@ -16,6 +16,13 @@
     white-space: normal;
 }
 
+@media (min-width: 768px){
+    .navbar-right {
+        float: right !important;
+        margin-right: 0px !important;
+    }
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

@@ -6,14 +6,6 @@
 
 <style>
     .card-body.my-profile .card-text a input {
-        /*padding-left: 15px;
-        padding-right: 15px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-
-        border: solid;
-        border-color: blue;
-        border-radius: 20%;*/
         border-radius: 16px;
         padding: 4px 25px;
         border-color: #7dcfb6;
@@ -25,9 +17,15 @@
         display: block;
     }
 
-        .card-body.my-profile .card-text a.back-button {
-            float: left;
-        }
+    .card-body.my-profile .card-text a.back-button {
+        float: left;
+    }
+
+    .form-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 </style>
 
 <div class="container" style="padding-left: 0px; padding-right: 0px">
@@ -74,20 +72,16 @@
                         <b>Gender: </b> @Html.DisplayFor(model => model.Gender) <br />
                         <b>Location: </b> @Html.DisplayFor(model => model.Location) <br />
                         <b>Email: </b> @Html.DisplayFor(model => model.Email) <br />
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
+                    </p>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Delete" class="btn btn-default" />
-                        @Html.ActionLink("Back to List", "MyProfile", "Animals", null, new { @class = "back-button" })
-                        
-                    </div>
-                            
-
-                            }
-
-                        </p>
+                        <div class="form-actions no-color">
+                            @Html.ActionLink("Back to List", "MyProfile", "Animals", null, new { @class = "btn btn-outline-default back-button" })
+                            <input type="submit" value="Delete" class="btn btn-default" />
+                        </div>
+                    }
                 </div>
             </div>
         </div>

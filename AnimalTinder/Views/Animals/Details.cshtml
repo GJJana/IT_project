@@ -25,8 +25,14 @@
         display: block;
     }
 
-    .card-body.my-profile .card-text a.back-button {
-        float: left;
+        .card-body.my-profile .card-text a.back-button {
+            float: left;
+        }
+
+    .form-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 </style>
 
@@ -74,17 +80,19 @@
                         <b>Gender: </b> @Html.DisplayFor(model => model.Gender) <br />
                         <b>Location: </b> @Html.DisplayFor(model => model.Location) <br />
                         <b>Email: </b> @Html.DisplayFor(model => model.Email) <br />
+                    </p>
 
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+                    <div class="form-actions no-color">
                         @if (ViewBag.PreviousPage.Equals("MyProfile"))
                         {
-                            @Html.ActionLink("Back to List", "MyProfile","Animals",null, new {   @class = "back-button" } )
+                            @Html.ActionLink("Back to List", "MyProfile", "Animals", null, new { @class = "btn btn-outline-default back-button" })
                         }
                         else
                         {
-                            @Html.ActionLink("Back to List", "Index", "Animals", null, new { @class = "back-button" } )
+                            @Html.ActionLink("Back to List", "Index", "Animals", null, new { @class = "btn-outline-default btn back-button" })
                         }
-                    </p>
+                        
+                    </div>
                 </div>
             </div>
         </div>

@@ -78,17 +78,12 @@ namespace AnimalTinder.Controllers
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user != null)
             {
-
-
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
                     string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account-Resend");
                     ViewBag.errorMessage = "You must have a confirmed email to log on.";
                     return View("Error");
                 }
-              
-
-
             }
 
             // This doesn't count login failures towards account lockout
@@ -184,12 +179,6 @@ namespace AnimalTinder.Controllers
             UserManager.AddToRole(user.Id, model.Role);
             return RedirectToAction("Index", "Animals");
 
-
-           
-
-
-           
-           
         }
 
         //
