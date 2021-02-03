@@ -24,7 +24,6 @@ namespace AnimalTinder.Models
         public string Description { get; set; }
         public string Location { get; set; }
         [Display(Name="Image")]
-        [Required]
         public string ImgURL { get; set; }
         [Required]
         public string Email { get; set; }

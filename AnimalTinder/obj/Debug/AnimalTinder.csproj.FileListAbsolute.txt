@@ -155,3 +155,4 @@ C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Mig
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.intKeyAnimalLIkedAnimal.resources
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.NewReq.resources
 C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.NewReqGender.resources
+C:\Users\janag\source\repos\AnimalTinder\AnimalTinder\obj\Debug\AnimalTinder.Migrations.withoutIMGReq.resources
